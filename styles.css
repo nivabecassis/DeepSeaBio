@@ -90,10 +90,6 @@ nav li a:hover {
   text-align: justify;
 }
 
-
-
-
-
 .slide_button {
   font-size: 32px;
   font-family: Gaegu;
@@ -107,6 +103,7 @@ nav li a:hover {
   position: relative;
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 #slide_button_wrapper {
@@ -128,6 +125,11 @@ nav li a:hover {
 #img_placeholder img {
   width: 200px;
   height: 200px;
+}
+
+#shark_article {
+  float: left;
+  margin-bottom: 50px;
 }
 
 
