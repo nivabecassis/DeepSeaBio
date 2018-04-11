@@ -129,3 +129,27 @@ nav li a:hover {
   width: 200px;
   height: 200px;
 }
+
+
+.clear_line {
+  clear: both;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.column {
+  float: left;
+  width: 30%;
+  margin: 10px 10px 20px 10px;
+}
+
+footer {
+  background-color: blue;
+  background-color: rgba(10, 89, 136, 0.85);
+  clear: both;
+  color: white;
+  margin-top: 50px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  text-align: center;
+}
