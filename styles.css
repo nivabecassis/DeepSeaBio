@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url('https://fonts.googleapis.com/css?family=Gaegu');
+/* Style sheet for index.html */
+/* Should we use this selector? */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+   display:block;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  /*linear gradient for illusion of sea color*/
+  /*background: linear-gradient(#04a8d5, #0c345c);*/
+}
+
+.intro {
+  height: 800px;
+  width: 100%;
+  background-image: url(content/ocean.jpg);
+  background-size: cover;
+}
+
+.inner {
+  padding: 20px 5%;
+}
+
+header {
+  text-align: center;
+  width: 100%;
+}
+
+nav li {
+  display: inline;
+  list-style: none;
+  margin-right: 60px;
+  font-family: Raleway;
+  font-size: 22px;
+}
+
+nav li a {
+  text-decoration: none;
+  color: #f2f2f2;
+  padding: 0 7px;
+}
+
+nav li a:hover {
+  color: grey;
+  color: rgba(136, 133, 133, 1);
+}
+
+.content {
+  text-align: center;
+  height: 30%;
+}
+
+.content h1 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 515px;
+  font-size: 60px;
+  font-family: Oswald;
+  color: #f2f2f2;
+  border: 5px solid #f2f2f2;
+  box-sizing: border-box;
+  border-radius: 20px;
+  width: 600px;
+  padding-bottom: 10px;
+}
+
+.page_content {
+  line-height: 28px;
+  font-size: 18px;
+  font-family: Raleway;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1020px;
+  width: 80%;
+  padding: 20px;
+  text-align: justify;
+}
+
+
+
+
+
+.slide_button {
+  font-size: 32px;
+  font-family: Gaegu;
+  background: none;
+  border: none;
+  padding: 3px;
+}
+
+#current_img {
+  height: 400px;
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#slide_button_wrapper {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#lorem {
+  float: left;
+  width: 62%;
+  padding-right: 50px;
+}
+
+#img_placeholder {
+  float: left;
+}
+
+#img_placeholder img {
+  width: 200px;
+  height: 200px;
+}
