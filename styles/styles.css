@@ -27,7 +27,7 @@ body {
 .intro {
   height: 800px;
   width: 100%;
-  background-image: url(content/ocean.jpg);
+  background-image: url("../content/ocean.jpg");
   background-size: cover;
 }
 

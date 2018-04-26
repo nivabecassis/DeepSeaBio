@@ -1,12 +1,5 @@
 "use strict";
 
-var u = {
-  $: function(id) {
-    var temp = document.getElementById(id);
-    return temp;
-  }
-}
-
 var g = {
   slideImages: [
     "great_blue_hole.jpg",
@@ -56,7 +49,7 @@ function switchImage(step) {
 document.addEventListener("DOMContentLoaded", initialize);
 
 function initialize() {
-  g.imageDiv = u.$("current_img");
-  var arrowDiv = u.$("slide_button_wrapper");
+  g.imageDiv = U.$("current_img");
+  var arrowDiv = U.$("slide_button_wrapper");
   arrowDiv.addEventListener("click", changeImage, true);
 }
