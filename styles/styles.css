@@ -67,7 +67,7 @@ nav li a:hover {
 .content h1 {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 515px;
+  /*margin-top: 515px;*/
   font-size: 60px;
   font-family: Oswald;
   color: #f2f2f2;
@@ -76,6 +76,10 @@ nav li a:hover {
   border-radius: 20px;
   width: 600px;
   padding-bottom: 10px;
+}
+
+.title {
+  margin-top: 500px;
 }
 
 .page_content {
