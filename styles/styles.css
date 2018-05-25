@@ -45,18 +45,22 @@ nav li {
   list-style: none;
   margin-right: 60px;
   font-family: Raleway;
+  font-weight: bolder;
   font-size: 22px;
+}
+
+nav li a:visited {
+  color: #000000;
 }
 
 nav li a {
   text-decoration: none;
-  color: #f2f2f2;
+  color: #000000;
   padding: 0 7px;
 }
 
 nav li a:hover {
-  color: grey;
-  color: rgba(136, 133, 133, 1);
+  color: #1757de;
 }
 
 .content {
@@ -158,4 +162,24 @@ footer {
   padding-bottom: 30px;
   padding-top: 30px;
   text-align: center;
+}
+
+.default_tabs {
+  /*background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);*/
+  /*background: linear-gradient(to bottom right, #0f9dbe, #163db9);*/
+  box-shadow: 0 1px 8px rgba(51,51,51,0.1);
+}
+
+.default_title {
+  float: left
+}
+
+.default_title a {
+  font-family: Raleway;
+  color: #1757de;
+  text-decoration: none;
+}
+
+.selected_title {
+  padding-bottom: 30px;
 }
