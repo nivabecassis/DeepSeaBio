@@ -209,16 +209,24 @@ footer {
   padding-bottom: 25px;
 }
 
+.bubble figure {
+  text-align: center;
+}
+
+.bubble p {
+  text-align: justify;
+}
+
 .img_bubble_3 {
   width: 33.33%;
 }
 
-.img_bubble img {
-  border: 2px solid #0966be;
-}
-
 .img_bubble {
   display: inline;
+}
+
+.img_bubble img {
+  padding-top: 15px;
 }
 
 .img_bubble_2 {
@@ -229,6 +237,7 @@ footer {
   width: 100%;
   margin-top: 20px;
   margin-bottom: 40px;
+  text-align: center;
 }
 
 .img_right {
@@ -292,6 +301,10 @@ footer {
   padding-left: 50px;
 }
 
-.bubble h4 {
+.bubble h3 {
   padding-bottom: 10px;
+}
+
+.animal_name {
+  font-weight: bold;
 }
