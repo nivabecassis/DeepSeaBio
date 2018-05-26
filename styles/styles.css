@@ -291,3 +291,7 @@ footer {
   padding-top: 10px;
   padding-left: 50px;
 }
+
+.bubble h4 {
+  padding-bottom: 10px;
+}
