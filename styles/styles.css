@@ -43,7 +43,7 @@ header {
 nav li {
   display: inline;
   list-style: none;
-  margin-right: 60px;
+  margin-right: 30px;
   font-family: Raleway;
   font-weight: bolder;
   font-size: 22px;
@@ -90,12 +90,18 @@ nav li a:hover {
   line-height: 28px;
   font-size: 18px;
   font-family: Raleway;
-  margin-left: auto;
+  margin-left: 180px;
   margin-right: auto;
   max-width: 1020px;
   width: 80%;
   padding: 20px;
-  text-align: justify;
+  top: 10%;
+  position: relative;
+  z-index: 1;
+}
+
+header nav {
+  padding-top: 5px;
 }
 
 .slide_button {
@@ -165,9 +171,16 @@ footer {
 }
 
 .default_tabs {
+  /*Gradients*/
   /*background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);*/
   /*background: linear-gradient(to bottom right, #0f9dbe, #163db9);*/
   box-shadow: 0 1px 8px rgba(51,51,51,0.1);
+  overflow: hidden;
+  background-color: #ffffff;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  z-index: 2;
 }
 
 .default_title {
@@ -231,4 +244,42 @@ footer {
   min-width: 800px;
   margin-bottom: 150px;
   margin-top: 30px;
+}
+
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 0; /* Stay on top */
+  top: 8%; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 40px;
+  box-shadow: 0 10px 8px rgba(51, 51, 51, 0.37);
+
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #000000;
+    display: block;
+    font-family: Raleway;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #1757de;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.bubble ul {
+  padding-top: 10px;
+  padding-left: 50px;
 }
