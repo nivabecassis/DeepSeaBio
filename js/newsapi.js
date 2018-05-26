@@ -2,7 +2,7 @@
 
 /*
  * Make request to api for a specific keyword and look at response.
- * Want the top 10 articles for that keyword and sort by most recent.
+ * Want the top 9 articles for that keyword and sort by most recent.
  * If its the first time for the user, save the data to localStorage.
  * If it is not their first time, check localStorage and see if they have
  * the data from TODAY. If it is not expired than use that. If it is
@@ -31,8 +31,8 @@ var News = {
 
   handleResponse: function(responseText) {
     var data = JSON.parse(responseText).articles;
-    //If there are less than 10 articles, choose that amount
-    var articleCount = data < 10 ? data.length : 10;
+    //If there are less than 9 articles, choose that amount
+    var articleCount = data < 9 ? data.length : 9;
     //Get all the info about each article
     for(var i = 0; i < articleCount; i++) {
       var article = {};

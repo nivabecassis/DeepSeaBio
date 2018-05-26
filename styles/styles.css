@@ -223,6 +223,7 @@ footer {
 
 .img_bubble {
   display: inline;
+  padding-left: 30px;
 }
 
 .img_bubble img {
@@ -238,6 +239,10 @@ footer {
   margin-top: 20px;
   margin-bottom: 40px;
   text-align: center;
+}
+
+div.clear_both p {
+  width: 60%;
 }
 
 .img_right {
