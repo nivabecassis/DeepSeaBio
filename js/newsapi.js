@@ -27,6 +27,7 @@ var News = {
     r.addEventListener("error", function() {
       errorCb(r.status);
     });
+    r.send();
   },
 
   handleResponse: function(responseText) {
@@ -45,7 +46,7 @@ var News = {
       News.articles.push(article);
     }
     //Update the stored articles
-    localStorage.setItem("deep_seas_articles", JSON.stringify(News.articles));
+    localStorage.setItem("deep_sea_articles", JSON.stringify(News.articles));
     //Update DOM with new content
     News.updateDOM();
   },
@@ -57,17 +58,52 @@ var News = {
 
   /**Uses the namespace's articles array of object literals to update DOM*/
   updateDOM: function() {
+    var storedData = JSON.parse(localStorage.getItem("deep_sea_articles"));
+    if(storedData) {
 
+    }
+  },
+
+  /**Gets a new String date with the step that is formatted with the '/' char*/
+  getFormattedDate: function(step, formatChar) {
+    var date = new Date();
+    date = new Date(date.setDate(date.getDate() + step));
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1)
+      : date.getMonth() + 1;
+    var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    return year + formatChar + month + formatChar + day;
   },
 
   /**
-   * Check if localStorage has anything in it than use that, otherwise
-   * make a new call to the server to get more data
+   * Set the expiry date to tomorrow then can check if they are the same
+   * If they are, then make a new request else use that
    */
   beginNewSession: function() {
+    var keyword = encodeURIComponent("\"Deep sea\"");
+    var today = News.getFormattedDate(-30, "-");
 
+    var url = 'https://newsapi.org/v2/everything?' +
+              'q=' + keyword + '&' +
+              'from=' + today + '&' +
+              'sortBy=popularity&' +
+              'apiKey=4a07367f8f84463ab79d04eae9550150';
+    var expiryUrl = url + ";expiry";
+    var expiry = localStorage.getItem(expiryUrl);
+
+    if(!expiry) {
+      //First time
+      localStorage.setItem(url + ";expiry", News.getFormattedDate(1, "-"));
+      News.makeHttpRequest(url, News.handleResponse, News.handleError);
+    } else if(News.getFormattedDate(0, "-") === expiry) {
+      //Expired
+      localStorage.setItem(url + ";expiry", News.getFormattedDate(1, "-"));
+      News.makeHttpRequest(url, News.handleResponse, News.handleError);
+    } else if(News.getFormattedDate(0, "-") < expiry) {
+      //Valid
+      News.updateDOM();
+    }
   }
-
-
-
 };
+
+document.addEventListener("DOMContentLoaded", News.beginNewSession);
