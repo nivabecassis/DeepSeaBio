@@ -86,6 +86,10 @@ nav li a:hover {
   margin-top: 500px;
 }
 
+.page_content_top {
+  top: 10%;
+}
+
 .page_content {
   line-height: 28px;
   font-size: 18px;
@@ -94,7 +98,6 @@ nav li a:hover {
   min-width: 500px;
   width: 80%;
   padding: 50px 20px;
-  top: 10%;
   position: relative;
   z-index: 1;
 }
@@ -323,9 +326,6 @@ footer {
   font-weight: bold;
 }
 
-.news_box {
-  /*TODO*/
-}
 
 figcaption {
   font-size: 14px;
@@ -340,4 +340,28 @@ figcaption {
 .animal_extract img {
   width: 40%;
   height: 40%;
+}
+
+.news_row {
+  overflow: hidden;
+}
+
+.news_box {
+  width: 29%;
+  float: left;
+  margin: 2% 2%;
+}
+
+.news_box img {
+  width: 100%;
+}
+
+.news_box h3 a {
+  font-size: 14px;
+  text-decoration: none;
+  color: black;
+}
+
+.news_box h3 a:hover {
+  color: #1757de;
 }

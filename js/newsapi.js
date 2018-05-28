@@ -62,7 +62,7 @@ var News = {
 
   /**Uses the namespace's articles array of object literals to update DOM*/
   updateDOM: function() {
-    var newsContainer = U.$("news_boxes_container");
+    var newsContainer = document.querySelector(".news_boxes_container");
     News.removeAllChildren(newsContainer);
 
     if(News.articles) {
@@ -74,10 +74,12 @@ var News = {
 
       for(var i = 0; i < rowCount; i++) {
         //If last row --> use the mod value else use 3
-        var colCount = (i === rowCount - 1) ? News.articles.length % 3 : 3;
+        var colCount = (i === rowCount - 1) ?
+          (News.articles.length % 3 === 0 ? 3 : News.articles.length % 3) : 3;
 
         //Individual row
         var row = document.createElement("div");
+        row.classList.add("news_row");
         newsContainer.appendChild(row);
 
         //Iterate through the columns of that row
@@ -89,17 +91,22 @@ var News = {
           var box = document.createElement("div");
           box.classList.add("news_box");
 
-          //TODO: review this syntax
-          box.style.backgroundImage = url(current.imgSrc);
-          row.appendChild(box);
+          var backgroundImg = document.createElement("img");
+          backgroundImg.src = current.imgSrc;
+          backgroundImg.alt = "article image";
+          box.appendChild(backgroundImg);
 
+          var titleDiv = document.createElement("div");
           var title = document.createElement("h3");
           var a = document.createElement("a");
           a.href = current.url;
           a.textContent = current.title;
           title.appendChild(a);
+          titleDiv.appendChild(title);
+          titleDiv.classList.add("news_title_div");
 
-          box.appendChild(title);
+          box.appendChild(titleDiv);
+          row.appendChild(box);
         }
       }
     }
@@ -159,6 +166,7 @@ var News = {
       News.makeHttpRequest(url, News.handleResponse, News.handleError);
     } else if(News.getFormattedDate(0, "-") < expiry) {
       //Valid
+      News.articles = JSON.parse(localStorage.getItem("deep_sea_articles"));
       News.updateDOM();
     }
   }
