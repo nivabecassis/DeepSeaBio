@@ -14,9 +14,7 @@ var News = {
   articles: [],
 
   makeHttpRequest: function(url, callback, errorCb) {
-    //TODO: set api user-agent
     var r = new XMLHttpRequest();
-    //r.setRequestHeader("User-Agent", "abecassis.niv@gmail.com");
     r.open("GET", url, true);
     r.addEventListener("load", function() {
       if(r.readyState === XMLHttpRequest.DONE && r.status === 200) {
