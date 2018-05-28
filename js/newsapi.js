@@ -16,6 +16,7 @@ var News = {
   makeHttpRequest: function(url, callback, errorCb) {
     //TODO: set api user-agent
     var r = new XMLHttpRequest();
+    //r.setRequestHeader("User-Agent", "abecassis.niv@gmail.com");
     r.open("GET", url, true);
     r.addEventListener("load", function() {
       if(r.readyState === XMLHttpRequest.DONE && r.status === 200) {
@@ -33,7 +34,7 @@ var News = {
   /**Add all the data to a object literal and push that to the array of articles*/
   handleResponse: function(responseText) {
     var data = JSON.parse(responseText).articles;
-    //If there are less than 9 articles, choose that amount
+    //If there are less than 27 articles, choose that amount
     var articleCount = data.length < 27 ? data.length : 27;
     //Get all the info about each article
     for(var i = 0; i < articleCount; i++) {
@@ -48,6 +49,11 @@ var News = {
     }
     //Update the stored articles
     localStorage.setItem("deep_sea_articles", JSON.stringify(News.articles));
+    //Save the position of how many articles are being displayed
+    News.shownArticleCount = News.articles.length < 9 ? News.articles.length : 9;
+    News.currentIndex = 0;
+    //Update DOM with new content
+    News.updateDOM();
   },
 
   /**Display something to users indicating that there was an error*/
@@ -61,11 +67,10 @@ var News = {
   /**Uses the namespace's articles array of object literals to update DOM*/
   updateDOM: function() {
     var newsContainer = document.querySelector(".news_boxes_container");
-    //News.removeAllChildren(newsContainer);
 
     if(News.articles) {
       //Total row count
-      var rowCount = News.shownArticleCount / 3;
+      var rowCount = Math.floor((News.shownArticleCount - News.currentIndex) / 3);
       if(News.shownArticleCount % 3 !== 0) {
         rowCount++;
       }
@@ -82,8 +87,8 @@ var News = {
 
         //Iterate through the columns of that row
         for(var j = 0; j < colCount; j++) {
-          //TODO: review this algorithm
-          var current = News.articles[i * colCount + j];
+          //var current = News.articles[i * colCount + j];
+          var current = News.articles[News.currentIndex];
 
           //Individual news box
           var box = document.createElement("div");
@@ -105,6 +110,8 @@ var News = {
 
           box.appendChild(titleDiv);
           row.appendChild(box);
+
+          News.currentIndex++;
         }
       }
     }
@@ -138,11 +145,33 @@ var News = {
     return year + formatChar + month + formatChar + day;
   },
 
+  loadMoreArticles: function() {
+    return function() {
+      //if there are more than 9 left return 9, if there are 9 return 9
+      //else return what ever is left
+      var next = (News.articles.length - News.shownArticleCount) > 9 ?
+        9 : (News.articles.length - News.shownArticleCount) === 9 ?
+        9 : News.articles.length - News.shownArticleCount;
+      News.shownArticleCount = News.shownArticleCount + next;
+      if(News.articles.length > News.shownArticleCount) {
+        News.updateDOM();
+      } else {
+        News.updateDOM();
+        var load = U.$("load_div");
+        var page = document.querySelector("section.page_content");
+        page.removeChild(load);
+      }
+    };
+  },
+
   /**
    * Set the expiry date to tomorrow then can check if they are the same
    * If they are, then make a new request else use that
    */
   beginNewSession: function() {
+    var loadMore = U.$("load_more_articles");
+    document.addEventListener("click", News.loadMoreArticles());
+
     var keyword = encodeURIComponent("\"Deep sea\"");
     var today = News.getFormattedDate(-30, "-");
 
@@ -165,11 +194,12 @@ var News = {
     } else if(News.getFormattedDate(0, "-") < expiry) {
       //Valid
       News.articles = JSON.parse(localStorage.getItem("deep_sea_articles"));
+      //Save the position of how many articles are being displayed
+      News.shownArticleCount = News.articles.length < 9 ? News.articles.length : 9;
+      News.currentIndex = 0;
+      //Update DOM with existing content
+      News.updateDOM();
     }
-    //Save the position of how many articles are being displayed
-    News.shownArticleCount = News.articles.length < 9 ? News.articles.length : 9;
-    //Update DOM with new content
-    News.updateDOM();
   }
 };
 
