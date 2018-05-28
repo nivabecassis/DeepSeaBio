@@ -34,7 +34,7 @@ var News = {
   handleResponse: function(responseText) {
     var data = JSON.parse(responseText).articles;
     //If there are less than 9 articles, choose that amount
-    var articleCount = data < 9 ? data.length : 9;
+    var articleCount = data.length < 27 ? data.length : 27;
     //Get all the info about each article
     for(var i = 0; i < articleCount; i++) {
       var article = {};
@@ -48,8 +48,6 @@ var News = {
     }
     //Update the stored articles
     localStorage.setItem("deep_sea_articles", JSON.stringify(News.articles));
-    //Update DOM with new content
-    News.updateDOM();
   },
 
   /**Display something to users indicating that there was an error*/
@@ -63,19 +61,19 @@ var News = {
   /**Uses the namespace's articles array of object literals to update DOM*/
   updateDOM: function() {
     var newsContainer = document.querySelector(".news_boxes_container");
-    News.removeAllChildren(newsContainer);
+    //News.removeAllChildren(newsContainer);
 
     if(News.articles) {
       //Total row count
-      var rowCount = News.articles.length / 3;
-      if(News.articles.length % 3 !== 0) {
+      var rowCount = News.shownArticleCount / 3;
+      if(News.shownArticleCount % 3 !== 0) {
         rowCount++;
       }
 
       for(var i = 0; i < rowCount; i++) {
         //If last row --> use the mod value else use 3
         var colCount = (i === rowCount - 1) ?
-          (News.articles.length % 3 === 0 ? 3 : News.articles.length % 3) : 3;
+          (News.shownArticleCount % 3 === 0 ? 3 : News.shownArticleCount % 3) : 3;
 
         //Individual row
         var row = document.createElement("div");
@@ -167,8 +165,11 @@ var News = {
     } else if(News.getFormattedDate(0, "-") < expiry) {
       //Valid
       News.articles = JSON.parse(localStorage.getItem("deep_sea_articles"));
-      News.updateDOM();
     }
+    //Save the position of how many articles are being displayed
+    News.shownArticleCount = News.articles.length < 9 ? News.articles.length : 9;
+    //Update DOM with new content
+    News.updateDOM();
   }
 };
 
