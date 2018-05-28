@@ -114,6 +114,11 @@ header nav {
   padding-top: 5px;
 }
 
+
+
+/**
+ * PLace holder stuff
+
 .slide_button {
   font-size: 32px;
   font-family: Gaegu;
@@ -157,11 +162,14 @@ header nav {
 }
 
 
+
 .clear_line {
   clear: both;
   margin-top: 50px;
   margin-bottom: 20px;
 }
+
+*/
 
 .column {
   float: left;
