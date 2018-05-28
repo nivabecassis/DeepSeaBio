@@ -217,6 +217,7 @@ footer {
 
 .bubble {
   padding-bottom: 25px;
+  clear: both;
 }
 
 .bubble figure {
@@ -249,14 +250,12 @@ footer {
   margin-top: 20px;
   margin-bottom: 40px;
   text-align: center;
-}
-
-div.clear_both p {
-  width: 60%;
+  overflow: hidden;
 }
 
 .img_right {
   float: right;
+  padding-left: 25px;
 }
 
 .clear_both {
@@ -331,4 +330,14 @@ div.clear_both p {
 figcaption {
   font-size: 14px;
   text-align: center;
+}
+
+.animal_extract {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.animal_extract img {
+  width: 40%;
+  height: 40%;
 }
