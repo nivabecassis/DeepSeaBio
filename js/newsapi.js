@@ -14,7 +14,7 @@ var News = {
   articles: [],
 
   makeHttpRequest: function(url, callback, errorCb) {
-    //set user agent
+    //TODO: set api user-agent
     var r = new XMLHttpRequest();
     r.open("GET", url, true);
     r.addEventListener("load", function() {
@@ -30,6 +30,7 @@ var News = {
     r.send();
   },
 
+  /**Add all the data to a object literal and push that to the array of articles*/
   handleResponse: function(responseText) {
     var data = JSON.parse(responseText).articles;
     //If there are less than 9 articles, choose that amount
@@ -52,15 +53,72 @@ var News = {
   },
 
   /**Display something to users indicating that there was an error*/
-  handleError: function() {
-
+  handleError: function(status) {
+    var newsContainer = U.$("news_boxes_container");
+    News.removeAllChildren(newsContainer);
+    News.addMessageToDOM("There was an error when communicating with the server. " +
+      "server status code: " + status);
   },
 
   /**Uses the namespace's articles array of object literals to update DOM*/
   updateDOM: function() {
-    var storedData = JSON.parse(localStorage.getItem("deep_sea_articles"));
-    if(storedData) {
+    var newsContainer = U.$("news_boxes_container");
+    News.removeAllChildren(newsContainer);
 
+    if(News.articles) {
+      //Total row count
+      var rowCount = News.articles.length / 3;
+      if(News.articles.length % 3 !== 0) {
+        rowCount++;
+      }
+
+      for(var i = 0; i < rowCount; i++) {
+        //If last row --> use the mod value else use 3
+        var colCount = (i === rowCount - 1) ? News.articles.length % 3 : 3;
+
+        //Individual row
+        var row = document.createElement("div");
+        newsContainer.appendChild(row);
+
+        //Iterate through the columns of that row
+        for(var j = 0; j < colCount; j++) {
+          //TODO: review this algorithm
+          var current = News.articles[i * colCount + j];
+
+          //Individual news box
+          var box = document.createElement("div");
+          box.classList.add("news_box");
+
+          //TODO: review this syntax
+          box.style.backgroundImage = url(current.imgSrc);
+          row.appendChild(box);
+
+          var title = document.createElement("h3");
+          var a = document.createElement("a");
+          a.href = current.url;
+          a.textContent = current.title;
+          title.appendChild(a);
+
+          box.appendChild(title);
+        }
+      }
+    }
+  },
+
+  /**Adds a message to the beginning of the news section*/
+  addMessageToDOM: function(msg) {
+    var div = document.createElement("div");
+    var newsContainer = U.$("news_boxes_container");
+    newsContainer.prepend(div);
+    var par = document.createElement("p");
+    par.textContent = msg;
+    newsContainer.appendChild(par);
+  },
+
+  /**Remove all children for a container*/
+  removeAllChildren: function(parent) {
+    while(parent.firstElementChild) {
+      parent.removeChild(parent.firstElementChild);
     }
   },
 
