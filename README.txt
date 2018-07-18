@@ -7,3 +7,7 @@ Javascript functionality:
 - Slideshow created with javascript
 
 This project was created to help a student present their Independant CE Project.
+
+You can find the website at the following link!
+
+https://nivabecassis.github.io/DeepSeaBio/index.html
