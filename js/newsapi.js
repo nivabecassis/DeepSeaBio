@@ -143,6 +143,21 @@ var News = {
     return year + formatChar + month + formatChar + day;
   },
 
+  /**
+   * Gets the count of days in the previous month.
+   * Takes into consideration the issues surrounding start of
+   * new year and Date methods 0-indexed.
+   */
+  getPreviousMonthDayCount: function() {
+    var now = new Date();
+    // Get the year of the previous month taking into consideration January
+    // will return -1 (due to 0 index).
+    var year = now.getMonth() < 0 ? now.getFullYear() - 1 : now.getFullYear();
+    // now.getMonth() is 0 indexed so it will automatically give the previous month
+    var month = now.getMonth() === 0 ? 12 : now.getMonth();
+    return new Date(year, month, 0).getDate();
+  },
+
   loadMoreArticles: function() {
     return function() {
       //if there are more than 9 left return 9, if there are 9 return 9
@@ -171,7 +186,11 @@ var News = {
     document.addEventListener("click", News.loadMoreArticles());
 
     var keyword = encodeURIComponent("\"Deep sea\"");
-    var today = News.getFormattedDate(-30, "-");
+    
+    // var today = News.getFormattedDate(-28, "-");
+    var prevMonthCount = News.getPreviousMonthDayCount();
+    var today = News.getFormattedDate(- prevMonthCount, "-");
+
 
     var url = 'https://newsapi.org/v2/everything?' +
               'q=' + keyword + '&' +
@@ -191,7 +210,8 @@ var News = {
       News.makeHttpRequest(url, News.handleResponse, News.handleError);
     } else if(News.getFormattedDate(0, "-") < expiry) {
       //Valid
-      News.articles = JSON.parse(localStorage.getItem("deep_sea_articles"));
+      var articles = localStorage.getItem("deep_sea_articles");
+      News.articles = JSON.parse(articles);
       //Save the position of how many articles are being displayed
       News.shownArticleCount = News.articles.length < 9 ? News.articles.length : 9;
       News.currentIndex = 0;
