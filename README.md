@@ -16,5 +16,5 @@ https://nivabecassis.github.io/DeepSeaBio/index.html
 
 [x] Fix the bug relating to the expiry date of the key
     - Didn't take into consideration that February is less than 30 days
-    - Fix: Get the Date object of the previous month and request the number of days for that month specifically
+    - Fix: Get the Date object of the previous month and request the number of days for that month specifically  
 [ ] Clone html template instead of creating new structure in JS every time
